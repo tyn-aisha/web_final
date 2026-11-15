@@ -1,0 +1,79 @@
+/* booking page (Bertan). Shared form look is in forms.css */
+.extras { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space); }
+.extra-item {
+  display: flex; align-items: center; gap: calc(var(--space) * 1.5); margin: 0;
+  padding: calc(var(--space) * 1.5) calc(var(--space) * 2);
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+  cursor: pointer; transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.extra-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.extra-item:has(input:checked) { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.1); }
+.extra-item .form-check-input { float: none; margin: 0; flex-shrink: 0; }
+.extra-text { display: flex; flex-direction: column; flex: 1; min-width: 0; line-height: 1.3; }
+.extra-text small { color: var(--muted); }
+.extra-item em { font-style: normal; color: var(--accent); white-space: nowrap; font-size: 0.9rem; }
+
+.slot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space); }
+.slot { margin: 0; cursor: pointer; }
+.slot input { position: absolute; opacity: 0; pointer-events: none; }
+.slot span {
+  display: flex; flex-direction: column; align-items: center; padding: calc(var(--space) * 1.25) var(--space);
+  background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius);
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+}
+.slot b { font-family: var(--font-head); letter-spacing: 1px; font-size: 1.1rem; }
+.slot small { color: var(--muted); font-size: 0.75rem; }
+.slot:hover span { border-color: var(--accent); transform: translateY(-2px); }
+.slot input:checked + span { border-color: var(--accent); background: rgba(var(--accent-rgb), 0.18); box-shadow: 0 0 0 1px var(--accent); }
+.slot input:focus-visible + span { box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.45); }
+.slot.is-busy { cursor: not-allowed; }
+.slot.is-busy span { opacity: 0.4; background: repeating-linear-gradient(135deg, transparent 0 6px, rgba(255, 255, 255, 0.04) 6px 12px), var(--bg); }
+.slot.is-busy:hover span { border-color: var(--line); transform: none; }
+.slot-grid .slot-hint { grid-column: 1 / -1; margin: 0; padding: calc(var(--space) * 2); border: 1px dashed var(--line); border-radius: var(--radius); color: var(--muted); }
+.slot-free { margin: var(--space) 0 0; color: var(--muted); font-size: 0.85rem; }
+
+.consent { margin-bottom: calc(var(--space) * 3); }
+
+.summary {
+  position: sticky; top: calc(var(--space) * 12);
+  padding: calc(var(--space) * 4);
+  background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.10), transparent 45%), var(--card);
+  border: 1px solid var(--accent); border-radius: var(--radius);
+}
+.summary h2 { font-size: 1.5rem; margin-bottom: calc(var(--space) * 3); }
+.summary dl { margin: 0 0 calc(var(--space) * 3); }
+.summary dl div { display: flex; justify-content: space-between; gap: calc(var(--space) * 2); padding: calc(var(--space) * 1.5) 0; border-bottom: 1px solid var(--line); }
+.summary dt { font-weight: 400; color: var(--muted); }
+.summary dd { margin: 0; text-align: right; }
+.summary dd.discount { color: var(--ok); }
+.total { display: flex; flex-direction: column; gap: 4px; }
+.total span { color: var(--muted); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+.total strong { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 2.8rem); color: var(--accent); line-height: 1.1; }
+.summary-note { margin: calc(var(--space) * 2) 0 0; color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 992px) { .summary { position: static; } }
+@media (max-width: 768px) { .extras { grid-template-columns: 1fr; } .slot-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px) { .slot-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* services saved from the Services page */
+.cart-panel { margin-bottom: calc(var(--space) * 3); padding: calc(var(--space) * 2) calc(var(--space) * 3); background: rgba(var(--accent-rgb), 0.06); border: 1px dashed rgba(var(--accent-rgb), 0.5); border-radius: var(--radius); }
+.cart-panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space); margin-bottom: var(--space); }
+.cart-panel-title { margin: 0; font-size: 1.05rem; }
+.cart-list { margin: 0; padding: 0; list-style: none; }
+.cart-item { display: flex; align-items: center; gap: calc(var(--space) * 1.5); padding: var(--space) 0; border-bottom: 1px solid var(--line); }
+.cart-item-name { flex: 1; display: flex; flex-direction: column; min-width: 0; overflow-wrap: anywhere; }
+.cart-item-name small { color: var(--accent); font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; }
+.cart-item em { font-style: normal; color: var(--accent); white-space: nowrap; }
+.cart-remove { width: 32px; height: 32px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--line); border-radius: 50%; color: var(--muted); font-size: 1.2rem; line-height: 1; cursor: pointer; transition: border-color 0.3s, color 0.3s, transform 0.3s; }
+.cart-remove:hover { border-color: var(--danger); color: var(--danger-text); transform: rotate(90deg); }
+.cart-remove:focus-visible { outline: 3px solid rgba(var(--accent-rgb), 0.6); outline-offset: 2px; }
+.cart-empty { margin: 0; color: var(--muted); }
+.cart-panel .cart-total { margin: var(--space) 0 0; font-size: 1.05rem; }
+
+.reco { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: calc(var(--space) * 1.5); margin-bottom: calc(var(--space) * 3); padding: calc(var(--space) * 2) calc(var(--space) * 3); background: rgba(var(--ok-rgb), 0.08); border: 1px solid var(--ok); border-radius: var(--radius); }
+.reco[hidden] { display: none; }
+.reco-text { margin: 0; flex: 1 1 220px; }
+
+.bookings-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space); }
+.bookings-head .btn[hidden] { display: none; }
+
